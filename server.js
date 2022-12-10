@@ -1,9 +1,18 @@
-//^ STEP 1
+//^ STEP 1 
 //* because it is installed using npm install express@4.17.1 we dont need to give it a file path
 const express = require('express');
 
-//^ STEP 6 : Morgan 
+//^ STEP 6 : Morgan : HTTP Requests and errors
 const morgan = require('morgan');
+
+//^ STEP 20: Require the campsite router module  to use it in this code
+const campsiteRouter = require('./routes/campsiteRouter');
+
+//^ STEP 22: Require the promotion router module to be used in the code
+const promotionRouter = require('./routes/promotionRouter');
+
+//^ STEP 24: Require the partners router module
+const partnerRouter = require('./routes/partnerRouter');
 
 //^ STEP 2 : same as HTTP we need to set the host name
 const hostname = 'localhost';
@@ -24,6 +33,24 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 
+//^ STEP 21 : add the route and take all the methods app.all , app.get , app.post, app.put, app.delete to the camspiterouter.js page and we will delete the one with campsiteid
+//* we added the campsite here thats why we do not need to specify in the camspiteRouter.js file
+app.use('/campsites', campsiteRouter);
+app.use('/campsites/:campsiteId', campsiteRouter);
+
+
+//^ STEP 23 : adding routes for promotions
+app.use('/promotions', promotionRouter);
+app.use('/promotions/:promotionId', promotionRouter);
+
+
+//^ STEP 24 : adding routes for partners
+app.use('/partners', partnerRouter);
+app.use('/partners/:partnerId', partnerRouter);
+
+
+
+/*
 //^ STEP 11 adding support for REST API endpoints
 //* the routing method (app.all) to catch all http verbs, we will use this to set properties on the response object that we will use as the default for all routing methods for this path so that we dont have to set it up repeatedly on each one 
 //* the ---routing method takes a path---- , and we are going to use this path for all method
@@ -102,6 +129,8 @@ app.put('/campsites/:campsiteId', (req, res) => {
 app.delete('/campsites/:campsiteId', (req, res) => {
     res.end(`Deleting campsite :${req.params.campsiteId} `)
 });
+
+*/
 
 
 //^ STEP 9 : set up Express to serve files from the public folder that contains HTML files 
