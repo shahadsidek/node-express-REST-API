@@ -1,10 +1,8 @@
-// STEP 1 : Require Express
+
 const express = require('express');
 
-// STEP 2: Set up the Router
 const promotionRouter = express.Router();
 
-// STEP 3 : adding routes to promotions and promotionsId
 promotionRouter.route('/')
     .all((req, res, next) => {
         res.statusCode = 200;
