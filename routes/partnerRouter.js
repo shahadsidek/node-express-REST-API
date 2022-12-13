@@ -22,7 +22,7 @@ partnerRouter.route('/')
         res.end('Deleting all Partners');
     });
 
-partnerRouter.route('/partners/:partnerId')
+partnerRouter.route('/:partnerId')
     .all((req, res, next) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain');
